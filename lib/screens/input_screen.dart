@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../Reusables/reusable_card.dart';
 
+const bottomContainerHeight = 80.0;
+const activeCardColor = Color(0xFF1D1E33);
+const bottomContainerColor = Color(0xFFEB1555);
+
 class InputScreen extends StatefulWidget {
   @override
   _InputScreenState createState() => _InputScreenState();
@@ -20,32 +24,35 @@ class _InputScreenState extends State<InputScreen> {
             child: Row(
               children: [
                 Expanded(
-                  child: ReusableCard(colour: Color(0xFF1D1E33),)
+                  child: ReusableCard(
+                    colour: activeCardColor,
+                  ),
                 ),
-                Expanded(
-                  child: ReusableCard(colour: Color(0xFF1D1E33))
-                ),
+                Expanded(child: ReusableCard(colour: activeCardColor)),
               ],
             ),
           ),
           Expanded(
-            child: ReusableCard(colour: Color(0xFF1D1E33)),
+            child: ReusableCard(colour: activeCardColor),
           ),
           Expanded(
             child: Row(
               children: [
                 Expanded(
-                  child: ReusableCard(colour: Color(0xFF1D1E33)),
+                  child: ReusableCard(colour: activeCardColor),
                 ),
-                Expanded(
-                  child: ReusableCard(colour: Color(0xFF1D1E33))
-                ),
+                Expanded(child: ReusableCard(colour: activeCardColor)),
               ],
             ),
           ),
+          Container(
+            color: bottomContainerColor,
+            margin: EdgeInsets.only(top: 10.0),
+            width: double.infinity,
+            height: bottomContainerHeight,
+          )
         ],
       ),
     );
   }
 }
-
