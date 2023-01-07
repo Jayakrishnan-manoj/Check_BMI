@@ -1,9 +1,11 @@
+import 'package:bmi_calculator/Helpers/calculator.dart';
 import 'package:bmi_calculator/Reusables/icon_content.dart';
 import 'package:bmi_calculator/Reusables/round_button.dart';
 import 'package:bmi_calculator/screens/result_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../Reusables/bottom_button.dart';
 import '../Reusables/reusable_card.dart';
 import '../constants/constants.dart';
 
@@ -205,34 +207,22 @@ class _InputScreenState extends State<InputScreen> {
               ],
             ),
           ),
-          GestureDetector(
+          BottomButton(
+            buttonTitle: "CALCULATE YOUR BMI!",
             onTap: () {
+              Calculator calc = Calculator(height: height, weight: weight);
+
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const ResultScreen(),
+                  builder: (context) => ResultScreen(
+                    bmiResult: calc.calculateBMI(),
+                    resultText: calc.getResult(),
+                    interpretation: calc.getInterpretation(),
+                  ),
                 ),
               );
             },
-            child: Container(
-              color: kBottomContainerColor,
-              margin: const EdgeInsets.only(top: 10.0),
-              width: double.infinity,
-              height: kBottomContainerHeight,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text(
-                    "CALCULATE YOUR BMI!",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20,
-                    ),
-                  ),
-                ],
-              ),
-            ),
           )
         ],
       ),
