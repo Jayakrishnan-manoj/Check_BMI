@@ -1,5 +1,6 @@
 import 'package:bmi_calculator/Reusables/icon_content.dart';
 import 'package:bmi_calculator/Reusables/round_button.dart';
+import 'package:bmi_calculator/screens/result_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -20,6 +21,7 @@ class _InputScreenState extends State<InputScreen> {
   Gender? selectedGender;
   int height = 180;
   int weight = 40;
+  int age = 14;
 
   @override
   Widget build(BuildContext context) {
@@ -140,9 +142,19 @@ class _InputScreenState extends State<InputScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             RoundIconButton(
+                              onPress: () {
+                                setState(() {
+                                  weight--;
+                                });
+                              },
                               icon: FontAwesomeIcons.minus,
                             ),
                             RoundIconButton(
+                              onPress: () {
+                                setState(() {
+                                  weight++;
+                                });
+                              },
                               icon: FontAwesomeIcons.plus,
                             ),
                           ],
@@ -154,16 +166,73 @@ class _InputScreenState extends State<InputScreen> {
                 Expanded(
                   child: ReusableCard(
                     colour: kActiveCardColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "AGE",
+                          style: labelTextStyle,
+                        ),
+                        Text(
+                          age.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            RoundIconButton(
+                              onPress: () {
+                                setState(() {
+                                  age--;
+                                });
+                              },
+                              icon: FontAwesomeIcons.minus,
+                            ),
+                            RoundIconButton(
+                              onPress: () {
+                                setState(() {
+                                  age++;
+                                });
+                              },
+                              icon: FontAwesomeIcons.plus,
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-          Container(
-            color: kBottomContainerColor,
-            margin: const EdgeInsets.only(top: 10.0),
-            width: double.infinity,
-            height: kBottomContainerHeight,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ResultScreen(),
+                ),
+              );
+            },
+            child: Container(
+              color: kBottomContainerColor,
+              margin: const EdgeInsets.only(top: 10.0),
+              width: double.infinity,
+              height: kBottomContainerHeight,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text(
+                    "CALCULATE YOUR BMI!",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           )
         ],
       ),
